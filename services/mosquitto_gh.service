@@ -1,0 +1,19 @@
+[Unit]
+Description=Smart GreenHouse Message
+# Wait for network connection
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Environment="ONE=1" "TWO=2"
+ExecStart=/usr/sbin/mosquitto -p 1881
+#ExecStart=/usr/bin/python3 /home/pi/smart_Greenhouse/temp_hum/temp_hum_pub.py
+Restart=always
+
+User=pi
+#Group=admin
+
+[Install]
+#normally defines a system state where all network services are started up and the system will accept logins
+WantedBy=multi-user.target

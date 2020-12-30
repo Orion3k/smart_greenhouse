@@ -1,0 +1,20 @@
+import paho.mqtt.client as mqtt
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
+
+
+client = mqtt.Client()
+client.on_connect=on_connect
+client.connect(localhost,1881,60)
+
+mqttc.loop_start()
+mqttc.loop_start()
+
+while True:
+    temperature = sensor.blocking_read()
+    mqttc.publish("paho/temperature", temperature)
+while True:
+    temperature = 0
+    #temperature = sensor.blocking_read()
+    mqttc.publish("greenhouse/temperature", temperature)
