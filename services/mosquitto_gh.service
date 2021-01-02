@@ -8,7 +8,6 @@ Wants=network-online.target
 Type=simple
 # Environment="ONE=1" "TWO=2"
 ExecStart=/usr/sbin/mosquitto -p 1881
-#ExecStart=/usr/bin/python3 /home/pi/smart_Greenhouse/temp_hum/temp_hum_pub.py
 Restart=always
 
 User=pi
