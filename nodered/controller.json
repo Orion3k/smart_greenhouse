@@ -90,7 +90,7 @@
         "type": "function",
         "z": "94e147c2.27c6a8",
         "name": "Set Daylight",
-        "func": "var hour = msg.myhour\nconsole.log(hour)\n\nif(23 > hour && hour > 20 ){\n    return {payload: 'warm_white'}\n} else if (20 > hour && hour > 10 ){\n    return {payload: 'cold_white'}\n} else if (10 > hour && hour > 8 ){\n    return {payload: 'purple'}\n} else \n    return {payload: 'night'}",
+        "func": "var hour = msg.myhour\nconsole.log(hour)\n\nif(23 > hour && hour >= 16 ){\n    return {payload: 'purple'}\n} else if (16 > hour && hour >= 11 ){\n    return {payload: 'cold_white'}\n} else if (11 > hour && hour >= 8 ){\n    return {payload: 'purple'}\n} else \n    return {payload: 'night'}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -192,9 +192,11 @@
         "type": "function",
         "z": "94e147c2.27c6a8",
         "name": "Init Fan",
-        "func": "global.set('fan',50);",
+        "func": "global.set('fan',100);",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 320,
         "y": 60,
         "wires": [
@@ -306,7 +308,7 @@
         "type": "function",
         "z": "94e147c2.27c6a8",
         "name": "Prepare message",
-        "func": "    if(msg.topic == \"greenhouse/temperature\")\n        topic=1;\n    else if(msg.topic == \"greenhouse/humidity\")\n        topic=2;\n    else if(msg.topic == \"greenhouse/light\")\n        topic=3;\n    else if(msg.topic == \"greenhouse/wind\")\n        topic=4;\n    else if(msg.topic == \"greenhouse/humidity/threshold\")\n        topic=5;\n    \n    var path = \"channels/1270564/publish/fields/field\"+topic+\"/*******\"\n    var newmsg={topic: path, payload: msg.payload}\n    return newmsg;",
+        "func": "    if(msg.topic == \"greenhouse/temperature\")\n        topic=1;\n    else if(msg.topic == \"greenhouse/humidity\")\n        topic=2;\n    else if(msg.topic == \"greenhouse/light\")\n        topic=3;\n    else if(msg.topic == \"greenhouse/wind\")\n        topic=4;\n    else if(msg.topic == \"greenhouse/humidity/threshold\")\n        topic=5;\n    \n    var path = \"channels/1270564/publish/fields/field\"+topic+\"/******\"\n    var newmsg={topic: path, payload: msg.payload}\n    return newmsg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -538,9 +540,11 @@
         "type": "function",
         "z": "94e147c2.27c6a8",
         "name": "Controller",
-        "func": "if (global.get('hum_mode') == \"AUTO\"){\n    if(msg.payload < global.get('hum_threshold')){\n        return {payload: 1};\n    } else if(msg.payload > global.get('hum_threshold')+3)\n        return {payload: 1};\n} else if (global.get('hum_mode') == \"MANUAL\")\n    return msg;\n",
+        "func": "if (global.get('hum_mode') == \"AUTO\"){\n    if(msg.payload < global.get('hum_threshold')){\n        return {payload: 1};\n    } else if(msg.payload > global.get('hum_threshold')+3)\n        return {payload: 0};\n} else if (global.get('hum_mode') == \"MANUAL\")\n    return msg;\n",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 1040,
         "y": 720,
         "wires": [
@@ -834,6 +838,8 @@
         "func": "global.set('hum_threshold',70);\nglobal.set('hum_mode',\"AUTO\");",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 330,
         "y": 100,
         "wires": [
@@ -845,7 +851,7 @@
         "type": "function",
         "z": "94e147c2.27c6a8",
         "name": "Set Humidity Threshold",
-        "func": "global.set('hum_threshold',msg.payload);\nglobal.set('hum_mode',\"AUTO\")\nmsg.topic= \"greenhouse/humidity/threshold\"",
+        "func": "global.set('hum_threshold',msg.payload);\nglobal.set('hum_mode',\"AUTO\")\nmsg.topic= \"greenhouse/humidity/threshold\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -854,7 +860,8 @@
         "y": 1020,
         "wires": [
             [
-                "61c36e5a.922e"
+                "61c36e5a.922e",
+                "4c112152.c89f5"
             ]
         ]
     },
@@ -935,7 +942,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "00 10 * * *",
+        "crontab": "00 11 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -964,11 +971,11 @@
             }
         ],
         "repeat": "",
-        "crontab": "00 20 * * *",
+        "crontab": "00 16 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "warm_white",
+        "payload": "purple",
         "payloadType": "str",
         "x": 190,
         "y": 320,
@@ -1287,7 +1294,7 @@
         "y": 1220,
         "wires": [
             [
-                "c5cfb49c.f3d868"
+                "242c461.4918aba"
             ]
         ]
     },
@@ -1306,7 +1313,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "0 0-7 * * *",
+        "crontab": "00 00 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -1316,7 +1323,7 @@
         "y": 1260,
         "wires": [
             [
-                "242c461.4918aba"
+                "c5cfb49c.f3d868"
             ]
         ]
     },
@@ -1330,8 +1337,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1140,
-        "y": 1220,
+        "x": 1120,
+        "y": 1260,
         "wires": [
             [
                 "9c193806.af2d48"
@@ -1348,8 +1355,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1140,
-        "y": 1260,
+        "x": 1120,
+        "y": 1220,
         "wires": [
             [
                 "9c193806.af2d48"
