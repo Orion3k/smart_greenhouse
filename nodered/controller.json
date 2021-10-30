@@ -1,15 +1,15 @@
 [
     {
-        "id": "94e147c2.27c6a8",
+        "id": "1e787f0d.dbabc1",
         "type": "tab",
         "label": "Greenhouse",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "7b47fc33.27ae14",
+        "id": "462e9d5c.f27a94",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "SunriseLed",
         "props": [
             {
@@ -31,14 +31,14 @@
         "y": 240,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "ee4010ec.e8a79",
+        "id": "a2e741f5.c037f",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "NightLed",
         "props": [
             {
@@ -60,14 +60,14 @@
         "y": 360,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "3835d96c.894986",
+        "id": "ad7d2493.bb97b8",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Initi",
         "repeat": "",
         "crontab": "",
@@ -80,17 +80,17 @@
         "y": 180,
         "wires": [
             [
-                "4d3c01ae.4a57a",
-                "992ec6db.cf1e48"
+                "cebf961.6386f68",
+                "62840e8.ea9edf"
             ]
         ]
     },
     {
-        "id": "719eea3e.743064",
+        "id": "fe9623e2.19eca",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Set Daylight",
-        "func": "var hour = msg.myhour\nconsole.log(hour)\n\nif(23 > hour && hour >= 16 ){\n    return {payload: 'purple'}\n} else if (16 > hour && hour >= 11 ){\n    return {payload: 'cold_white'}\n} else if (11 > hour && hour >= 8 ){\n    return {payload: 'purple'}\n} else \n    return {payload: 'night'}",
+        "func": "var hour = msg.myhour\nconsole.log(hour)\n\nif(23 > hour && hour >= 16 ){\n    return {payload: 'purple'}\n} else if (16 > hour && hour >= 11 ){\n    return {payload: 'purple'}\n} else if (11 > hour && hour >= 8 ){\n    return {payload: 'purple'}\n} else \n    return {payload: 'night'}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -99,14 +99,14 @@
         "y": 180,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "b3790e8.363b2f",
+        "id": "d2130f04.1e306",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "ext. body",
         "func": "return {\n    payload: msg.payload.body\n};",
         "outputs": 1,
@@ -115,14 +115,14 @@
         "y": 420,
         "wires": [
             [
-                "c319805b.32323"
+                "40c5e52.0ebd21c"
             ]
         ]
     },
     {
-        "id": "c319805b.32323",
+        "id": "40c5e52.0ebd21c",
         "type": "json",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "",
         "property": "payload",
         "action": "",
@@ -131,14 +131,14 @@
         "y": 420,
         "wires": [
             [
-                "5bffb5d8.01c38c"
+                "2d8e63f7.f524ec"
             ]
         ]
     },
     {
-        "id": "5bffb5d8.01c38c",
+        "id": "2d8e63f7.f524ec",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Set light commands",
         "func": "if (msg.payload.action=='light_on')\n    return { payload: 'cold_white' }\nelse if (msg.payload.action=='light_off')\n    return { payload: 'night' }\nelse if (msg.payload.action=='light_color')\n    return { payload: 'yellow' }",
         "outputs": 1,
@@ -147,17 +147,17 @@
         "y": 420,
         "wires": [
             [
-                "41d26ac2.46a4b4",
-                "e0cfa372.47612"
+                "10768fd3.107bc",
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "e0cfa372.47612",
+        "id": "9ee7c36f.2cec4",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Set_Colors",
-        "func": "switch(msg.payload) {\n    case \"cold_white\":\n    global.set('RED',100);\n    global.set('GREEN',100);\n    global.set('BLUE',100);\n    break;\n  case \"red\":\n    global.set('RED',100);\n    global.set('GREEN',0);\n    global.set('BLUE',0);\n    break;\n  case \"blu\":\n    global.set('RED',0);\n    global.set('GREEN',0);\n    global.set('BLUE',100);\n    break;\n  case \"purple\":\n    global.set('RED',100);\n    global.set('GREEN',0);\n    global.set('BLUE',100);\n    break;\n  case \"warm_white\":\n    global.set('RED',100);\n    global.set('GREEN',100);\n    global.set('BLUE',70);\n    break;\n  case \"green\":\n    global.set('RED',0);\n    global.set('GREEN',100);\n    global.set('BLUE',0);\n    break;\n    case \"yellow\":\n    global.set('RED',100);\n    global.set('GREEN',100);\n    global.set('BLUE',0);\n    break;\n    case \"green\":\n    global.set('RED',0);\n    global.set('GREEN',100);\n    global.set('BLUE',0);\n    break;\n  default:\n    global.set('RED',0);\n    global.set('GREEN',0);\n    global.set('BLUE',0)\n    return {payload: 0};\n}\nreturn {payload:1}\n",
+        "func": "switch(msg.payload) {\n    case \"cold_white\":\n    global.set('RED',100);\n    global.set('GREEN',100);\n    global.set('BLUE',100);\n    break;\n  case \"red\":\n    global.set('RED',100);\n    global.set('GREEN',0);\n    global.set('BLUE',0);\n    break;\n  case \"blu\":\n    global.set('RED',0);\n    global.set('GREEN',0);\n    global.set('BLUE',100);\n    break;\n  case \"purple\":\n    global.set('RED',100);\n    global.set('GREEN',0);\n    global.set('BLUE',100);\n    break;\n  case \"warm_white\":\n    global.set('RED',100);\n    global.set('GREEN',100);\n    global.set('BLUE',70);\n    break;\n  case \"green\":\n    global.set('RED',0);\n    global.set('GREEN',100);\n    global.set('BLUE',0);\n    break;\n    case \"yellow\":\n    global.set('RED',100);\n    global.set('GREEN',100);\n    global.set('BLUE',0);\n    break;\n    case \"green\":\n    global.set('RED',0);\n    global.set('GREEN',100);\n    global.set('BLUE',0);\n    break;\n    case \"night\":\n    global.set('RED',0);\n    global.set('GREEN',0);\n    global.set('BLUE',0);\n    break;\n}\nreturn {payload:1}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -166,21 +166,23 @@
         "y": 280,
         "wires": [
             [
-                "e430aa14.71d398",
-                "9d574faa.ef032",
-                "4c258f72.5a0a9",
-                "41d26ac2.46a4b4"
+                "b836129e.b21d5",
+                "25f72bd7.cee6b4",
+                "78f53dca.ef9f94",
+                "10768fd3.107bc"
             ]
         ]
     },
     {
-        "id": "8e0ae3e5.f7856",
+        "id": "81b87066.215a6",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Init Colors",
-        "func": "global.set('RED',100);\nglobal.set('GREEN',100);\nglobal.set('BLUE',100);",
+        "func": "global.set('RED',100);\nglobal.set('GREEN',100);\nglobal.set('BLUE',100);\nglobal.set('light_intensity',1)",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 320,
         "y": 20,
         "wires": [
@@ -188,11 +190,11 @@
         ]
     },
     {
-        "id": "483c8960.3880e8",
+        "id": "76bb30d4.525d7",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Init Fan",
-        "func": "global.set('fan',100);",
+        "func": "global.set('fan',100);\nglobal.set('fan_mode','AUTO');",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -204,43 +206,47 @@
         ]
     },
     {
-        "id": "e430aa14.71d398",
+        "id": "b836129e.b21d5",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "",
-        "func": "msg.payload = global.get('RED')\nreturn msg;",
+        "func": "msg.payload = global.get('RED') * global.get('light_intensity')\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 950,
         "y": 220,
         "wires": [
             [
-                "37c6a3a0.844d4c"
+                "6c1a14ca.3b32ec"
             ]
         ]
     },
     {
-        "id": "9d574faa.ef032",
+        "id": "25f72bd7.cee6b4",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "",
-        "func": "\nmsg.payload = global.get('GREEN')\n\nreturn msg;",
+        "func": "\nmsg.payload = global.get('GREEN') * global.get('light_intensity')\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 950,
         "y": 280,
         "wires": [
             [
-                "3c036227.3795fe"
+                "bebf660e.a4da28"
             ]
         ]
     },
     {
-        "id": "4c258f72.5a0a9",
+        "id": "78f53dca.ef9f94",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "",
-        "func": "msg.payload = global.get('BLUE')\nreturn msg;",
+        "func": "msg.payload = global.get('BLUE') * global.get('light_intensity')\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -249,14 +255,14 @@
         "y": 340,
         "wires": [
             [
-                "897b96d1.ba6ab8"
+                "15dcb818.eb9858"
             ]
         ]
     },
     {
-        "id": "ec30a517.024de8",
+        "id": "fbb69b4d.6d90f8",
         "type": "mqtt in",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Temp",
         "topic": "greenhouse/temperature",
         "qos": "0",
@@ -266,15 +272,15 @@
         "y": 560,
         "wires": [
             [
-                "a2d39528.db9488",
-                "4c112152.c89f5"
+                "1cf7bb61.221365",
+                "c8ba5a3b.0b6de8"
             ]
         ]
     },
     {
-        "id": "ece69dbf.0e3be",
+        "id": "6a979bd4.3e61f4",
         "type": "mqtt in",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Humid",
         "topic": "greenhouse/humidity",
         "qos": "0",
@@ -284,16 +290,16 @@
         "y": 640,
         "wires": [
             [
-                "4c112152.c89f5",
-                "f79aa7dc.ca6948",
-                "a2d39528.db9488"
+                "c8ba5a3b.0b6de8",
+                "deb87845.a38348",
+                "1cf7bb61.221365"
             ]
         ]
     },
     {
-        "id": "43423454.98f9cc",
+        "id": "3cc0215c.86126e",
         "type": "mqtt out",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "mqtt ThingSpeak",
         "topic": "",
         "qos": "",
@@ -304,11 +310,11 @@
         "wires": []
     },
     {
-        "id": "61c36e5a.922e",
+        "id": "c5a6ab28.1cce68",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Prepare message",
-        "func": "    if(msg.topic == \"greenhouse/temperature\")\n        topic=1;\n    else if(msg.topic == \"greenhouse/humidity\")\n        topic=2;\n    else if(msg.topic == \"greenhouse/light\")\n        topic=3;\n    else if(msg.topic == \"greenhouse/wind\")\n        topic=4;\n    else if(msg.topic == \"greenhouse/humidity/threshold\")\n        topic=5;\n    \n    var path = \"channels/1270564/publish/fields/field\"+topic+\"/******\"\n    var newmsg={topic: path, payload: msg.payload}\n    return newmsg;",
+        "func": "    if(msg.topic == \"greenhouse/temperature\")\n        topic=1;\n    else if(msg.topic == \"greenhouse/humidity\")\n        topic=2;\n    else if(msg.topic == \"greenhouse/light\")\n        topic=3;\n    else if(msg.topic == \"greenhouse/wind\")\n        topic=4;\n    else if(msg.topic == \"greenhouse/humidity/threshold\")\n        topic=5;\n    \n    var path = \"channels/****/publish/fields/field\"+topic+\"/*******\"\n    var newmsg={topic: path, payload: msg.payload}\n    return newmsg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -317,15 +323,15 @@
         "y": 600,
         "wires": [
             [
-                "43423454.98f9cc",
-                "4c112152.c89f5"
+                "c8ba5a3b.0b6de8",
+                "f8f717e4.705ee8"
             ]
         ]
     },
     {
-        "id": "41d26ac2.46a4b4",
+        "id": "10768fd3.107bc",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "add \"light\" topic",
         "func": "msg.topic=\"greenhouse/light\"\nreturn msg;",
         "outputs": 1,
@@ -334,15 +340,15 @@
         "y": 500,
         "wires": [
             [
-                "61c36e5a.922e",
-                "4c112152.c89f5"
+                "c5a6ab28.1cce68",
+                "c8ba5a3b.0b6de8"
             ]
         ]
     },
     {
-        "id": "4c112152.c89f5",
+        "id": "c8ba5a3b.0b6de8",
         "type": "debug",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -355,67 +361,38 @@
         "wires": []
     },
     {
-        "id": "37c74de1.335802",
+        "id": "b26fb0d5.93a32",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "ON",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "greenhouse/humidity/m_command",
         "payload": "1",
         "payloadType": "num",
-        "x": 910,
-        "y": 780,
+        "x": 890,
+        "y": 760,
         "wires": [
             [
-                "488b482.2e672b8"
+                "d0ac711d.5b128"
             ]
         ]
     },
     {
-        "id": "86cebba1.e2b8a8",
+        "id": "3a469681.ec3bba",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
-        "name": "OFF",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 910,
-        "y": 840,
-        "wires": [
-            [
-                "488b482.2e672b8"
-            ]
-        ]
-    },
-    {
-        "id": "d58322d4.3726c",
-        "type": "mqtt in",
-        "z": "94e147c2.27c6a8",
-        "name": "Overheat",
-        "topic": "greenhouse/overheat",
-        "qos": "0",
-        "datatype": "json",
-        "broker": "64d00cbd.ab4324",
-        "x": 180,
-        "y": 800,
-        "wires": [
-            [
-                "83f62e24.a407b",
-                "7fd21bd5.f0c624"
-            ]
-        ]
-    },
-    {
-        "id": "c804f752.3bd378",
-        "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "OFF",
         "props": [
             {
@@ -430,21 +407,68 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "greenhouse/humidity/m_command",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 890,
+        "y": 800,
+        "wires": [
+            [
+                "d0ac711d.5b128"
+            ]
+        ]
+    },
+    {
+        "id": "2f9b6b50.347694",
+        "type": "mqtt in",
+        "z": "1e787f0d.dbabc1",
+        "name": "Overheat",
+        "topic": "greenhouse/overheat",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "64d00cbd.ab4324",
+        "x": 180,
+        "y": 800,
+        "wires": [
+            [
+                "ed51b2ee.ab84f",
+                "518530c5.88422"
+            ]
+        ]
+    },
+    {
+        "id": "4b8fd8bd.58cf48",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "OFF",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "greenhouse/fan/speed",
         "payload": "0",
         "payloadType": "num",
         "x": 270,
         "y": 1180,
         "wires": [
             [
-                "7fd21bd5.f0c624"
+                "22cf8c10.c27124"
             ]
         ]
     },
     {
-        "id": "cdb240ba.03bfd",
+        "id": "3d6966b3.be654a",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "MorningFan",
         "props": [
             {
@@ -455,56 +479,27 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
-        "crontab": "00 09 * * *",
+        "repeat": "120",
+        "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "greenhouse/fan/auto",
         "payload": "100",
         "payloadType": "num",
-        "x": 170,
-        "y": 960,
+        "x": 90,
+        "y": 980,
         "wires": [
             [
-                "7fd21bd5.f0c624"
+                "b2b4e39e.259d9"
             ]
         ]
     },
     {
-        "id": "4f07ebce.56adb4",
-        "type": "inject",
-        "z": "94e147c2.27c6a8",
-        "name": "NightFan",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 23 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "100",
-        "payloadType": "num",
-        "x": 170,
-        "y": 1020,
-        "wires": [
-            [
-                "7fd21bd5.f0c624"
-            ]
-        ]
-    },
-    {
-        "id": "926c05a5.fd2278",
+        "id": "1128a94f.d82967",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Set Day/Night",
-        "func": "var hour = msg.myhour\nconsole.log(hour)\n\nif(23 > hour && hour >= 9 ){\n    return { payload:  50};\n} else {\n    return { payload: 100 };\n}",
+        "func": "var hour = msg.myhour\nconsole.log(hour)\n\nif(23 > hour && hour >= 9 ){\n    return { payload:  100, topic: 'greenhouse/fan/auto'};\n} else {\n    return { payload: 100, topic: 'greenhouse/fan/auto' };\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -513,14 +508,14 @@
         "y": 880,
         "wires": [
             [
-                "7fd21bd5.f0c624"
+                "518530c5.88422"
             ]
         ]
     },
     {
-        "id": "83f62e24.a407b",
+        "id": "ed51b2ee.ab84f",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "add \"wind\" topic",
         "func": "msg.topic=\"greenhouse/wind\"\nreturn msg;",
         "outputs": 1,
@@ -531,16 +526,16 @@
         "y": 800,
         "wires": [
             [
-                "61c36e5a.922e"
+                "c5a6ab28.1cce68"
             ]
         ]
     },
     {
-        "id": "f79aa7dc.ca6948",
+        "id": "deb87845.a38348",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Controller",
-        "func": "if (global.get('hum_mode') == \"AUTO\"){\n    if(msg.payload < global.get('hum_threshold')){\n        return {payload: 1};\n    } else if(msg.payload > global.get('hum_threshold')+3)\n        return {payload: 0};\n} else if (global.get('hum_mode') == \"MANUAL\")\n    return msg;\n",
+        "func": "if (global.get('hum_mode') == \"AUTO\"){\n    \n    if(msg.payload === 100 ) {\n        return {payload: 0};\n        \n    } else if(msg.payload < global.get('hum_threshold')){\n        return {payload: 1};\n        \n    } else if(msg.payload > global.get('hum_threshold') + 2)\n        return {payload: 0};\n        \n} else if (global.get('hum_mode') == \"MANUAL\")\n\n    if(msg.topic == \"greenhouse/humidity/m_command\")\n        return msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -549,16 +544,16 @@
         "y": 720,
         "wires": [
             [
-                "238ba1e0.d3417e"
+                "c1654d85.4531f"
             ]
         ]
     },
     {
-        "id": "7fd21bd5.f0c624",
+        "id": "518530c5.88422",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Set_Wind",
-        "func": "global.set('fan',msg.payload);\nreturn msg;",
+        "func": "if (global.get('fan_mode') == \"AUTO\"){\n    if(msg.topic == \"greenhouse/fan/auto\")\n        return msg;\n} else if (global.get('fan_mode') == \"MANUAL\")\n    if(msg.topic == \"greenhouse/fan/speed\")\n        return msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -567,15 +562,14 @@
         "y": 980,
         "wires": [
             [
-                "83f62e24.a407b",
-                "181ac39.c6fbc3c"
+                "52c0fb0d.a008f4"
             ]
         ]
     },
     {
-        "id": "fe41d5bf.4c7718",
+        "id": "564055b3.a4751c",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Wind",
         "props": [
             {
@@ -590,21 +584,21 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "greenhouse/fan/speed",
         "payload": "100",
         "payloadType": "num",
         "x": 270,
         "y": 1100,
         "wires": [
             [
-                "7fd21bd5.f0c624"
+                "22cf8c10.c27124"
             ]
         ]
     },
     {
-        "id": "24ac56df.97d89a",
+        "id": "b68fb562.df1808",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Breeze",
         "props": [
             {
@@ -619,21 +613,21 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "greenhouse/fan/speed",
         "payload": "50",
         "payloadType": "num",
         "x": 270,
         "y": 1140,
         "wires": [
             [
-                "7fd21bd5.f0c624"
+                "22cf8c10.c27124"
             ]
         ]
     },
     {
-        "id": "efbb111.23609f",
+        "id": "161bc9ee.929716",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "80%",
         "repeat": "",
         "crontab": "",
@@ -642,18 +636,18 @@
         "topic": "",
         "payload": "80",
         "payloadType": "num",
-        "x": 910,
-        "y": 980,
+        "x": 890,
+        "y": 1000,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "cc87f16b.eba0c",
+        "id": "1b46f43.3ed290c",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "70%",
         "props": [
             {
@@ -671,18 +665,18 @@
         "topic": "",
         "payload": "70",
         "payloadType": "num",
-        "x": 910,
-        "y": 1020,
+        "x": 890,
+        "y": 1040,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "a72a5c61.4592",
+        "id": "2f70a472.8ea16c",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "90%",
         "props": [
             {
@@ -700,18 +694,18 @@
         "topic": "",
         "payload": "90",
         "payloadType": "num",
-        "x": 910,
-        "y": 940,
+        "x": 890,
+        "y": 960,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "53f646e.e83bcb8",
+        "id": "48eb14cd.16a60c",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Cold White",
         "repeat": "",
         "crontab": "",
@@ -724,14 +718,14 @@
         "y": 20,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "411b6c74.f1d254",
+        "id": "16f2b8e3.bb8447",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Warm White",
         "repeat": "",
         "crontab": "",
@@ -744,14 +738,14 @@
         "y": 60,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "f9e43829.d474b8",
+        "id": "36ba6ed2.112172",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Purple",
         "repeat": "",
         "crontab": "",
@@ -764,14 +758,14 @@
         "y": 100,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "5058a3e4.77666c",
+        "id": "b0481b20.517258",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Red",
         "repeat": "",
         "crontab": "",
@@ -784,14 +778,14 @@
         "y": 20,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "ea94ea9d.d25578",
+        "id": "89446c1f.e371",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Blu",
         "repeat": "",
         "crontab": "",
@@ -804,14 +798,14 @@
         "y": 60,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "6f4ce8ee.cf10c8",
+        "id": "94f8475c.536138",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Init params",
         "repeat": "",
         "crontab": "",
@@ -824,18 +818,18 @@
         "y": 60,
         "wires": [
             [
-                "8e0ae3e5.f7856",
-                "483c8960.3880e8",
-                "cfe92c58.0eb47"
+                "81b87066.215a6",
+                "76bb30d4.525d7",
+                "7f33f4c5.a06efc"
             ]
         ]
     },
     {
-        "id": "cfe92c58.0eb47",
+        "id": "7f33f4c5.a06efc",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Init Humidity",
-        "func": "global.set('hum_threshold',70);\nglobal.set('hum_mode',\"AUTO\");",
+        "func": "global.set('hum_threshold',70);\nglobal.set('hum_mode',\"MANUAL\");",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -847,28 +841,28 @@
         ]
     },
     {
-        "id": "9c193806.af2d48",
+        "id": "d3db9c70.4cd88",
         "type": "function",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Set Humidity Threshold",
-        "func": "global.set('hum_threshold',msg.payload);\nglobal.set('hum_mode',\"AUTO\")\nmsg.topic= \"greenhouse/humidity/threshold\"\nreturn msg;",
+        "func": "global.set('hum_threshold',msg.payload);\nmsg.topic= \"greenhouse/humidity/threshold\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1110,
-        "y": 1020,
+        "x": 1090,
+        "y": 1040,
         "wires": [
             [
-                "61c36e5a.922e",
-                "4c112152.c89f5"
+                "c5a6ab28.1cce68",
+                "c8ba5a3b.0b6de8"
             ]
         ]
     },
     {
-        "id": "a2d39528.db9488",
+        "id": "1cf7bb61.221365",
         "type": "delay",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Delay",
         "pauseType": "queue",
         "timeout": "5",
@@ -884,33 +878,15 @@
         "y": 600,
         "wires": [
             [
-                "61c36e5a.922e",
-                "4c112152.c89f5"
+                "c5a6ab28.1cce68",
+                "c8ba5a3b.0b6de8"
             ]
         ]
     },
     {
-        "id": "488b482.2e672b8",
-        "type": "function",
-        "z": "94e147c2.27c6a8",
-        "name": "",
-        "func": "global.set('hum_mode',\"MANUAL\")\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 1060,
-        "y": 800,
-        "wires": [
-            [
-                "f79aa7dc.ca6948"
-            ]
-        ]
-    },
-    {
-        "id": "3f452e6e.e80e12",
+        "id": "d964082c.b72d48",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Yellow",
         "repeat": "",
         "crontab": "",
@@ -923,14 +899,14 @@
         "y": 100,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "5fd3c07b.3b0a4",
+        "id": "6120714a.06218",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "MidDayLed",
         "props": [
             {
@@ -946,20 +922,20 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "cold_white",
+        "payload": "purple",
         "payloadType": "str",
         "x": 190,
         "y": 280,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "f611cb94.318a58",
+        "id": "dd5d54ca.5585c8",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "SunsetLed",
         "props": [
             {
@@ -981,14 +957,14 @@
         "y": 320,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "a8a597e2.9e1b58",
+        "id": "d594e2d3.fd9dd",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Green",
         "repeat": "",
         "crontab": "",
@@ -1001,56 +977,56 @@
         "y": 140,
         "wires": [
             [
-                "e0cfa372.47612"
+                "9ee7c36f.2cec4"
             ]
         ]
     },
     {
-        "id": "37c6a3a0.844d4c",
+        "id": "6c1a14ca.3b32ec",
         "type": "rpi-gpio out",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "RED",
         "pin": "21",
         "set": "",
         "level": "0",
-        "freq": "50",
+        "freq": "90",
         "out": "pwm",
         "x": 1090,
         "y": 220,
         "wires": []
     },
     {
-        "id": "3c036227.3795fe",
+        "id": "bebf660e.a4da28",
         "type": "rpi-gpio out",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "GREEN",
         "pin": "19",
         "set": "",
         "level": "0",
-        "freq": "50",
+        "freq": "90",
         "out": "pwm",
         "x": 1100,
         "y": 280,
         "wires": []
     },
     {
-        "id": "897b96d1.ba6ab8",
+        "id": "15dcb818.eb9858",
         "type": "rpi-gpio out",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "BLUE",
         "pin": "23",
         "set": "",
         "level": "0",
-        "freq": "50",
+        "freq": "90",
         "out": "pwm",
         "x": 1090,
         "y": 340,
         "wires": []
     },
     {
-        "id": "238ba1e0.d3417e",
+        "id": "c1654d85.4531f",
         "type": "rpi-gpio out",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Nebulizer",
         "pin": "13",
         "set": true,
@@ -1062,9 +1038,9 @@
         "wires": []
     },
     {
-        "id": "181ac39.c6fbc3c",
+        "id": "52c0fb0d.a008f4",
         "type": "rpi-gpio out",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "Fan",
         "pin": "11",
         "set": "",
@@ -1076,9 +1052,9 @@
         "wires": []
     },
     {
-        "id": "e5387bf.9102888",
+        "id": "dd795c9d.dbce4",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "50%",
         "props": [
             {
@@ -1096,18 +1072,18 @@
         "topic": "",
         "payload": "50",
         "payloadType": "num",
-        "x": 910,
-        "y": 1100,
+        "x": 890,
+        "y": 1120,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "b03ffeac.4856a",
+        "id": "b01c927f.9ac77",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "60%",
         "props": [
             {
@@ -1125,18 +1101,18 @@
         "topic": "",
         "payload": "60",
         "payloadType": "num",
-        "x": 910,
-        "y": 1060,
+        "x": 890,
+        "y": 1080,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "ecce4b1c.f6eb88",
+        "id": "1e54e4e7.43e44b",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "0%",
         "props": [
             {
@@ -1154,18 +1130,18 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 910,
-        "y": 1140,
+        "x": 890,
+        "y": 1160,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "2e46b48f.88eb5c",
+        "id": "273d7d13.c37bd2",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "100%",
         "props": [
             {
@@ -1183,31 +1159,107 @@
         "topic": "",
         "payload": "100",
         "payloadType": "num",
-        "x": 920,
-        "y": 900,
+        "x": 900,
+        "y": 920,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "1a5d0372.da717d",
+        "id": "653c78b9.46bf68",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "MorningHum",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 07 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "70",
+        "payloadType": "num",
+        "x": 920,
+        "y": 1240,
+        "wires": [
+            [
+                "c5e87e91.3d8f3"
+            ]
+        ]
+    },
+    {
+        "id": "4f71a61b.9193a8",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "MorningReset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 05 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 920,
+        "y": 1440,
+        "wires": [
+            [
+                "d3db9c70.4cd88"
+            ]
+        ]
+    },
+    {
+        "id": "c5e87e91.3d8f3",
+        "type": "function",
+        "z": "1e787f0d.dbabc1",
+        "name": "Randomize+40",
+        "func": "msg.payload = msg.payload + (40 * Math.random())\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1100,
+        "y": 1240,
+        "wires": [
+            [
+                "d3db9c70.4cd88"
+            ]
+        ]
+    },
+    {
+        "id": "793be0fe.1e35",
         "type": "webhookrelay",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "buckets": "lightOn",
         "x": 200,
         "y": 420,
         "wires": [
             [
-                "b3790e8.363b2f"
+                "d2130f04.1e306"
             ]
         ]
     },
     {
-        "id": "4d3c01ae.4a57a",
+        "id": "cebf961.6386f68",
         "type": "simpletime",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "curr_time",
         "mydate": true,
         "myymd": true,
@@ -1232,15 +1284,15 @@
         "y": 180,
         "wires": [
             [
-                "719eea3e.743064",
-                "4c112152.c89f5"
+                "fe9623e2.19eca",
+                "c8ba5a3b.0b6de8"
             ]
         ]
     },
     {
-        "id": "992ec6db.cf1e48",
+        "id": "62840e8.ea9edf",
         "type": "simpletime",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "curr_time",
         "mydate": true,
         "myymd": true,
@@ -1265,15 +1317,38 @@
         "y": 880,
         "wires": [
             [
-                "926c05a5.fd2278"
+                "1128a94f.d82967"
             ]
         ]
     },
     {
-        "id": "ee585d50.43d43",
+        "id": "f8f717e4.705ee8",
+        "type": "delay",
+        "z": "1e787f0d.dbabc1",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 870,
+        "y": 600,
+        "wires": [
+            [
+                "3cc0215c.86126e"
+            ]
+        ]
+    },
+    {
+        "id": "a6ce96b0.7caf28",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
-        "name": "MorningHum",
+        "z": "1e787f0d.dbabc1",
+        "name": "AUTO",
         "props": [
             {
                 "p": "payload"
@@ -1284,24 +1359,42 @@
             }
         ],
         "repeat": "",
-        "crontab": "00 08 * * *",
+        "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
-        "payload": "70",
+        "topic": "greenhouse/humidity/a_command",
+        "payload": "-1",
         "payloadType": "num",
-        "x": 940,
-        "y": 1220,
+        "x": 890,
+        "y": 840,
         "wires": [
             [
-                "242c461.4918aba"
+                "d0ac711d.5b128"
             ]
         ]
     },
     {
-        "id": "491bcbb5.ea0544",
+        "id": "d0ac711d.5b128",
+        "type": "function",
+        "z": "1e787f0d.dbabc1",
+        "name": "@",
+        "func": "if(msg.payload < 0)\n    global.set('hum_mode',\"AUTO\")\nelse\n    global.set('hum_mode',\"MANUAL\")\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1030,
+        "y": 800,
+        "wires": [
+            [
+                "deb87845.a38348"
+            ]
+        ]
+    },
+    {
+        "id": "d7320307.bb406",
         "type": "inject",
-        "z": "94e147c2.27c6a8",
+        "z": "1e787f0d.dbabc1",
         "name": "NightHum",
         "props": [
             {
@@ -1317,49 +1410,366 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "40",
+        "payload": "100",
         "payloadType": "num",
-        "x": 930,
-        "y": 1260,
+        "x": 910,
+        "y": 1400,
         "wires": [
             [
-                "c5cfb49c.f3d868"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "c5cfb49c.f3d868",
+        "id": "93affe0.2ffda",
         "type": "function",
-        "z": "94e147c2.27c6a8",
-        "name": "Randomize+-10",
+        "z": "1e787f0d.dbabc1",
+        "name": "Randomize+20",
         "func": "msg.payload = msg.payload + (20 * Math.random())\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1120,
-        "y": 1260,
+        "x": 1100,
+        "y": 1320,
         "wires": [
             [
-                "9c193806.af2d48"
+                "d3db9c70.4cd88"
             ]
         ]
     },
     {
-        "id": "242c461.4918aba",
+        "id": "2f21fcc8.55e374",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "AfternoonHum",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 14 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "70",
+        "payloadType": "num",
+        "x": 920,
+        "y": 1320,
+        "wires": [
+            [
+                "93affe0.2ffda"
+            ]
+        ]
+    },
+    {
+        "id": "fbdb0a44.4ff5f8",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "EveningHum",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 20 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "75",
+        "payloadType": "num",
+        "x": 920,
+        "y": 1360,
+        "wires": [
+            [
+                "d2b04ba8.9bb398"
+            ]
+        ]
+    },
+    {
+        "id": "d2b04ba8.9bb398",
         "type": "function",
-        "z": "94e147c2.27c6a8",
-        "name": "Randomize+-20",
+        "z": "1e787f0d.dbabc1",
+        "name": "Randomize+40",
         "func": "msg.payload = msg.payload + (40 * Math.random())\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1120,
+        "x": 1100,
+        "y": 1360,
+        "wires": [
+            [
+                "d3db9c70.4cd88"
+            ]
+        ]
+    },
+    {
+        "id": "b40fe44c.1ddce8",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "LaunchBreak",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 12 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 920,
+        "y": 1280,
+        "wires": [
+            [
+                "d3db9c70.4cd88"
+            ]
+        ]
+    },
+    {
+        "id": "a06c819.71eb18",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "Wind",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "greenhouse/fan/speed",
+        "payload": "-1",
+        "payloadType": "num",
+        "x": 270,
+        "y": 1060,
+        "wires": [
+            [
+                "22cf8c10.c27124"
+            ]
+        ]
+    },
+    {
+        "id": "22cf8c10.c27124",
+        "type": "function",
+        "z": "1e787f0d.dbabc1",
+        "name": "@",
+        "func": "if(msg.payload < 0)\n    global.set('fan_mode',\"AUTO\")\nelse\n    global.set('fan_mode',\"MANUAL\")\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 410,
+        "y": 1120,
+        "wires": [
+            [
+                "518530c5.88422"
+            ]
+        ]
+    },
+    {
+        "id": "b2b4e39e.259d9",
+        "type": "function",
+        "z": "1e787f0d.dbabc1",
+        "name": "Rand Wind",
+        "func": "msg.payload = 51 + Math.floor(Math.random() * 50);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 250,
+        "y": 980,
+        "wires": [
+            [
+                "518530c5.88422"
+            ]
+        ]
+    },
+    {
+        "id": "68bc3af8.3abe14",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "AUTO",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "-1",
+        "payloadType": "num",
+        "x": 270,
         "y": 1220,
         "wires": [
             [
-                "9c193806.af2d48"
+                "22cf8c10.c27124"
+            ]
+        ]
+    },
+    {
+        "id": "b4cc6b.44317398",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "100% Light Intensity",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 990,
+        "y": 40,
+        "wires": [
+            [
+                "f1fd4ad8.f2c108"
+            ]
+        ]
+    },
+    {
+        "id": "ae5d2e83.bb9ff",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "70% Light Intensity",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.7",
+        "payloadType": "str",
+        "x": 990,
+        "y": 80,
+        "wires": [
+            [
+                "f1fd4ad8.f2c108"
+            ]
+        ]
+    },
+    {
+        "id": "f1fd4ad8.f2c108",
+        "type": "function",
+        "z": "1e787f0d.dbabc1",
+        "name": "",
+        "func": "global.set('light_intensity',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1200,
+        "y": 100,
+        "wires": [
+            [
+                "b836129e.b21d5",
+                "25f72bd7.cee6b4",
+                "78f53dca.ef9f94"
+            ]
+        ]
+    },
+    {
+        "id": "c3e710db.145bd",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "50% Light Intensity",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.5",
+        "payloadType": "str",
+        "x": 990,
+        "y": 120,
+        "wires": [
+            [
+                "f1fd4ad8.f2c108"
+            ]
+        ]
+    },
+    {
+        "id": "74d2fe54.01289",
+        "type": "inject",
+        "z": "1e787f0d.dbabc1",
+        "name": "20% Light Intensity",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.2",
+        "payloadType": "str",
+        "x": 990,
+        "y": 160,
+        "wires": [
+            [
+                "f1fd4ad8.f2c108"
             ]
         ]
     },
