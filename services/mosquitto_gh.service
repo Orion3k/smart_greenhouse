@@ -7,7 +7,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 # Environment="ONE=1" "TWO=2"
-ExecStart=/usr/sbin/mosquitto -p 1881
+ExecStart=/usr/sbin/mosquitto -c /etc/mosquitto/conf.d/default.conf
 Restart=always
 
 User=pi
